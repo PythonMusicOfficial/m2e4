@@ -1,6 +1,5 @@
 import os
 import json
-import sys
 
 def create_folder_and_file():
     folder_path = "C:\\Program Files\\m2e4"
@@ -32,9 +31,7 @@ def choose_and_display_data():
     for i, file in enumerate(file_list, start=1):
         print(f"{i}. {file}")
     
-    choice = input("Enter the number of the file to open (or type 'exit' to quit): ")
-    if choice == 'exit':
-        sys.exit("Exiting the program.")
+    choice = input("Enter the number of the file to open: ")
     
     try:
         choice_idx = int(choice) - 1
@@ -45,6 +42,10 @@ def choose_and_display_data():
             data = json.load(file)
             print("Data from the chosen file:")
             print(data)
+        
+        exit_choice = input("Type 'exit' to close: ")
+        if exit_choice.lower() == 'exit':
+            return
     except (ValueError, IndexError):
         print("Invalid choice!")
 

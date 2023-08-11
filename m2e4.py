@@ -33,8 +33,9 @@ def choose_and_display_data():
         print(f"{i}. {file}")
     
     choice = input("Enter the number of the file to open (or type 'exit' to quit): ")
-    if choice.lower() == "exit":
-        sys.exit()
+    if choice == 'exit':
+        sys.exit("Exiting the program.")
+    
     try:
         choice_idx = int(choice) - 1
         chosen_file = file_list[choice_idx]
@@ -44,24 +45,19 @@ def choose_and_display_data():
             data = json.load(file)
             print("Data from the chosen file:")
             print(data)
-        
-        input("Press Enter to continue...")
     except (ValueError, IndexError):
         print("Invalid choice!")
 
 def main():
     print("m2e4")
-    while True:
-        action = input("Do you want to create a new file or choose an existing one? (create/choose/exit): ")
-        
-        if action == "create":
-            create_folder_and_file()
-        elif action == "choose":
-            choose_and_display_data()
-        elif action == "exit":
-            sys.exit()
-        else:
-            print("Invalid choice!")
+    action = input("Do you want to create a new file or choose an existing one? (create/choose): ")
+    
+    if action == "create":
+        create_folder_and_file()
+    elif action == "choose":
+        choose_and_display_data()
+    else:
+        print("Invalid choice!")
 
 if __name__ == "__main__":
     main()

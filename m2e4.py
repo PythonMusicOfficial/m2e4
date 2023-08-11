@@ -1,6 +1,6 @@
-
 import os
 import json
+import sys
 
 def create_folder_and_file():
     folder_path = "C:\\Program Files\\m2e4"
@@ -32,7 +32,9 @@ def choose_and_display_data():
     for i, file in enumerate(file_list, start=1):
         print(f"{i}. {file}")
     
-    choice = input("Enter the number of the file to open: ")
+    choice = input("Enter the number of the file to open (or type 'exit' to quit): ")
+    if choice.lower() == "exit":
+        sys.exit()
     try:
         choice_idx = int(choice) - 1
         chosen_file = file_list[choice_idx]
@@ -42,19 +44,24 @@ def choose_and_display_data():
             data = json.load(file)
             print("Data from the chosen file:")
             print(data)
+        
+        input("Press Enter to continue...")
     except (ValueError, IndexError):
         print("Invalid choice!")
 
 def main():
-    print("🅼2⃣🅴4⃣")
-    action = input("Do you want to create a new file or choose an existing one? (create/choose): ")
-    
-    if action == "create":
-        create_folder_and_file()
-    elif action == "choose":
-        choose_and_display_data()
-    else:
-        print("Invalid choice!")
+    print("m2e4")
+    while True:
+        action = input("Do you want to create a new file or choose an existing one? (create/choose/exit): ")
+        
+        if action == "create":
+            create_folder_and_file()
+        elif action == "choose":
+            choose_and_display_data()
+        elif action == "exit":
+            sys.exit()
+        else:
+            print("Invalid choice!")
 
 if __name__ == "__main__":
     main()
